@@ -1,12 +1,20 @@
+const pg = require("pg");
 const express = require('express');
 const app = express();
 const cors = require('cors');
 const pool = require('./db');
-
+const env = require("../env.json");
+const Pool = pg.Pool;
+const pool = new Pool(env);
+pool.connect().then(function () {
+  console.log(`Connected to database ${env.database}`);
+});
 app.use(cors());
 app.use(express.json());
-
-// add api routes here
+app.use(express.static("../react-ui/public"));
+ 
+//
+// add api routes here 
 
 // create employee
 
@@ -15,6 +23,7 @@ app.use(express.json());
 // delete task
 
 // etc...
+
 
 
 app.listen(5000, () => {
