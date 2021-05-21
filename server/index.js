@@ -1,9 +1,10 @@
 const express = require('express');
-const path = require('path');
-const cluster = require('cluster');
-const numCPUs = require('os').cpus().length;
+const app = express();
+// const path = require('path');
+// const cluster = require('cluster');
+// const numCPUs = require('os').cpus().length;
 const cors = require("cors");
-const pool = require("./db");
+// const pool = require("./db");
 
 app.use(cors());
 app.use(express.json());
@@ -21,7 +22,7 @@ app.use(express.json());
 
 app.listen(5000, () => {
   console.log("Server listening on port 5000");
-})
+});
 
 
 
