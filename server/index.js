@@ -15,10 +15,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("../react-ui/public"));
  
+let port = 5000;
+let hostname = "localhost";
 //
-// add api routes here 
+// add api routes here  z
 
-const validType = ["employer", "employee"];
+
 const min = 3;
 
 // login 
@@ -45,23 +47,19 @@ app.get("/login", function (req, res) {
 })
 
 // create employee
-app.post("/signup", function (req, res){
+app.post("/signup", function (req, res) {
     let body = req.body;
+    console.log(body)
+    console.log("testing")
     if (
-      body.username != "" ||
-      body.username.length < min ||
-      !validType.includes(body.type)
+      body.username.length < min
     ) {
       res.send();
       return res.status(400);
     }
-
-      bcrypt
-      .hash(body.password, saltRounds)
-      .then(function (hashedPassword) {
           pool.query(
             "INSERT INTO users (name, username, password, type) VALUES($1, $2, $3, $4)",
-            [body.name, body.username, hashedPassword, body.type]
+            [body.name, body.username, body.password, body.type]
           )
               .then(function (response) {
                   console.log(response.rows)
@@ -71,13 +69,6 @@ app.post("/signup", function (req, res){
                   console.log(error);
                   res.status(500).send(); 
               });
-      })
-      .catch(function (error) {
-          console.log(error);
-          res.status(500).send(); 
-      });
-
-
 })
 
 // create task
@@ -88,7 +79,7 @@ app.post("/signup", function (req, res){
 
 
 
-app.listen(5000, () => {
+app.listen(port, hostname, () => {
   console.log("Server listening on port 5000");
 });
 
