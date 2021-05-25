@@ -15,12 +15,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("../react-ui/public"));
  
-//
 // add api routes here 
 
 const validType = ["employer", "employee"];
 const min = 3;
+
 // create employee
+
 app.post("/signup", function (req, res){
     let body = req.body;
     if (
@@ -52,13 +53,79 @@ app.post("/signup", function (req, res){
           console.log(error);
           res.status(500).send(); 
       });
-
-
 })
 
-// create task
+// add task
+
+app.post("/add", function (req, res){
+    let body = req.body;
+    if (
+      body.name != "" ||
+      body.name.length < min
+    ) {
+      res.send();
+      return res.status(400);
+    }
+      .then(function (body) {
+          pool.query(
+            "INSERT INTO tasks (name, description) VALUES($1, $2)",
+            [body.name, body.description]
+          )
+              .then(function (response) {
+                  console.log(response.rows)
+                  res.status(200).send();
+              })
+              .catch(function (error) {
+                  console.log(error);
+                  res.status(500).send();
+              });
+      })
+      .catch(function (error) {
+          console.log(error);
+          res.status(500).send();
+      });
 
 // delete task
+    
+app.post("/delete", function (req, res){
+    let body = req.body;
+    if (body.name != "") {
+      res.send();
+      return res.status(400);
+    }.then(function (body) {
+          pool.query(
+            "DELETE FROM tasks WHERE description = $1", [body.description]
+          )
+              .then(function (response) {
+                  console.log(response.rows)
+                  res.status(200).send();
+              })
+              .catch(function (error) {
+                  console.log(error);
+                  res.status(500).send();
+              });
+      })
+      .catch(function (error) {
+          console.log(error);
+          res.status(500).send();
+      });
+})
+
+//view tasks
+  
+app.post("/view", function (req, res){
+        pool.query("SELECT * FROM tasks")
+                  .then(function (response) {
+                      console.log(response.rows)
+                      res.status(200).send();
+                  })
+                  .catch(function (error) {
+                      console.log(error);
+                      res.status(500).send();
+                  });
+})
+    
+
 
 // etc...
 

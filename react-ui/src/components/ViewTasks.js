@@ -3,7 +3,7 @@ import React, { Fragment, useState } from 'react';
 const SignUp = () => {
     return (
         <Fragment>
-            <h1 className="text-center mt-2">Employee Sign Up</h1>
+            <h1 className="text-center mt-2">View Employee Tasks</h1>
             <form>
                 <label name="name" for="name">Name:</label>
                 <input type="name" className="form-control" />
