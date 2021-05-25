@@ -36,7 +36,7 @@ app.post("/signup", function (req, res){
       .hash(body.password, saltRounds)
       .then(function (hashedPassword) {
           pool.query(
-            "INSERT INTO users(name, username, password, type) VALUES($1, $2, $3) RETURNING *",
+            "INSERT INTO users (name, username, password, type) VALUES($1, $2, $3, $4)",
             [body.name, body.username, hashedPassword, body.type]
           )
               .then(function (response) {
