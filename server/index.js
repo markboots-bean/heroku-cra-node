@@ -20,6 +20,30 @@ app.use(express.static("../react-ui/public"));
 
 const validType = ["employer", "employee"];
 const min = 3;
+
+// login 
+app.get("/login", function (req, res) {
+  let body = req.body;
+  let { type } = req.query;
+  if (type != 'employee' || type != 'employer') {
+    res.send();
+    return res.status(500);
+  }
+  
+  // not sure how to do username and password validation
+  pool.query("SELECT * FROM users WHERE type = $1 AND username = $2", 
+  [type, body.username]
+  )
+    .then(function (response) {
+      console.log(response.rows);
+      res.send();
+      res.status(200);
+    })
+    .catch(function (error) {
+        return res.sendStatus(500);
+    });
+})
+
 // create employee
 app.post("/signup", function (req, res){
     let body = req.body;
