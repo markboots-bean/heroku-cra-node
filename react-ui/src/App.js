@@ -1,8 +1,8 @@
 // import React, { useCallback, useEffect, useState } from 'react';
 
 import React, { Fragment } from 'react';
-
 import './App.css';
+import SignUp from './components/SignUp';
 
 function App() {
   // const [message, setMessage] = useState(null);
@@ -32,7 +32,11 @@ function App() {
   // }, [fetchData]);
 
   return (
-    <Fragment></Fragment>
+    <Fragment>
+      <div className="container">
+        <SignUp />
+      </div>
+    </Fragment>
   );
 
 }
