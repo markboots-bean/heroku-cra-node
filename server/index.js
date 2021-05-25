@@ -21,7 +21,7 @@ app.use(express.static("../react-ui/public"));
 const validType = ["employer", "employee"];
 const min = 3;
 // create employee
-app.post("signup", function (req, res){
+app.post("/signup", function (req, res){
     let body = req.body;
     if (
       body.username != "" ||
