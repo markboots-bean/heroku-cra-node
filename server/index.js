@@ -2,7 +2,7 @@ const pg = require("pg");
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const pool = require('./db');
+// const pool = require('./db');
 const env = require("../env.json");
 const Pool = pg.Pool;
 const pool = new Pool(env);
@@ -16,7 +16,34 @@ app.use(express.static("../react-ui/public"));
 //
 // add api routes here 
 
+const validType = ["employer", "employee"];
+const min = 3;
 // create employee
+app.post("signup", function (req, res){
+    let body = req.body;
+    if (
+      body.username.length < min ||
+      !validType.includes(body.type)
+    ) {
+      res.send();
+      return res.status(400);
+    }
+
+    pool.query(
+      "INSERT INTO users(name, username, password, type) VALUES($1, $2, $3) RETURNING *",
+      [body.name, body.username, body.password, body.type]
+  )
+      .then(function (response) {
+          console.log(response.rows);
+          res.send();
+          res.status(200);
+      })
+      .catch(function (error) {
+          return res.status(500);
+      });
+
+
+})
 
 // create task
 
