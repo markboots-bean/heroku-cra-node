@@ -1,8 +1,10 @@
 const pg = require("pg");
 const express = require('express');
+const bcrypt = require("bcrypt");
 const app = express();
 const cors = require('cors');
 // const pool = require('./db');
+const saltRounds = 10;
 const env = require("../env.json");
 const Pool = pg.Pool;
 const pool = new Pool(env);
@@ -22,6 +24,7 @@ const min = 3;
 app.post("signup", function (req, res){
     let body = req.body;
     if (
+      body.username != "" ||
       body.username.length < min ||
       !validType.includes(body.type)
     ) {
@@ -29,17 +32,25 @@ app.post("signup", function (req, res){
       return res.status(400);
     }
 
-    pool.query(
-      "INSERT INTO users(name, username, password, type) VALUES($1, $2, $3) RETURNING *",
-      [body.name, body.username, body.password, body.type]
-  )
-      .then(function (response) {
-          console.log(response.rows);
-          res.send();
-          res.status(200);
+      bcrypt
+      .hash(body.password, saltRounds)
+      .then(function (hashedPassword) {
+          pool.query(
+            "INSERT INTO users(name, username, password, type) VALUES($1, $2, $3) RETURNING *",
+            [body.name, body.username, hashedPassword, body.type]
+          )
+              .then(function (response) {
+                  console.log(response.rows)
+                  res.status(200).send();
+              })
+              .catch(function (error) {
+                  console.log(error);
+                  res.status(500).send(); 
+              });
       })
       .catch(function (error) {
-          return res.status(500);
+          console.log(error);
+          res.status(500).send(); 
       });
 
 
