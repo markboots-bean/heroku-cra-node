@@ -3,6 +3,7 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, Link } from 'react-router-dom'
 import './App.css';
+
 import Login from './components/login';
 import SignUp from './components/signup';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -46,6 +47,8 @@ function App() {
                 />
               </Switch>
         </div>
+
+
     </Fragment>
   );
 

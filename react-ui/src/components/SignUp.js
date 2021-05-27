@@ -7,7 +7,7 @@ const SignUp = props => {
      //state     set state   default state (in input field)
     const [username, setUserName] = useState("")
     const [password, setPassword] = useState("")
-    const [type, setType] = useState("")
+    // const [type, setType] = useState("")
 
 
     const onSubmitForm = async (e) => {
@@ -38,9 +38,9 @@ const SignUp = props => {
                 <input type="username" className="form-control" value={username} onChange={e => setUserName(e.target.value)}/>
                 <label name="password" htmlFor="password">Password:</label>
                 <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
-                <label name="type" htmlFor="type">Type:</label>
-                <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
-                <button className="btn btn-success mt-3">Sign up</button>
+                {/* <label name="type" for="type">Type:</label>
+                <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/> */}
+                <button className="btn btn-success">Sign up</button>
             </form>
         </Fragment>
     )
