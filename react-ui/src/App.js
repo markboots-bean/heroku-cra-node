@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import './App.css';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   // const [message, setMessage] = useState(null);
@@ -34,14 +35,26 @@ function App() {
 
   return (
     <Fragment>
-      <div className="container">
-        <Login />
-      </div>
-      {/* <div className="container">
-        <SignUp />
-      </div> */}
+        <div className="container">
+          <Login />
+        </div>
+        <div className="container">
+          <SignUp />
+        </div>
     </Fragment>
   );
+
+  // return (
+  //     <Router>
+  //       <div className="container">
+  //         <Login />
+  //         {/* <Route path="/signup" component={SignUp} /> */}
+  //       </div>
+  //       {/* <div className="container">
+  //         <SignUp />
+  //       </div> */}
+  //     </Router>
+  // );
 
 }
 

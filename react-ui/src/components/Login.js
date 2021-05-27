@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 
+
 const Login = () => {
 
     const[username , setUsername] = useState("")
@@ -10,7 +11,7 @@ const Login = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { username };
+            const body = { username, password, type };
             const response = await fetch("/login", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -28,12 +29,8 @@ const Login = () => {
             <h1 className="text-center mt-2"> Task Manager Login</h1>
             <form onSubmit={onSubmitForm}>
                 {/* Make AccountType into a dropdown */}
-                <label name="type" htmlFor="type">Account Type</label>
-                <select name="type" id="type" className="form-control">
-                    <option value="">--Please choose account type--</option>
-                    <option value="Employer">Employer</option>
-                    <option value="Employee">Employee</option>
-                </select>
+                <label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
+                <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
                 <label name="username" htmlFor="username">Username</label>
                 <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                 <label name="password" htmlFor="password">Password</label>
