@@ -25,16 +25,15 @@ const min = 3;
 // login
 app.get("/login", function (req, res) {
   let body = req.body;
-  let { type } = req.query;
   console.log(body);
-  if (type != 'employee' || type != 'employer') {
+  if (type != 'employee' && type != 'employer') {
     res.send();
     return res.status(500);
   }
 
   // not sure how to do username and password validation
   pool.query("SELECT * FROM users WHERE type = $1 AND username = $2", 
-  [type, body.username]
+  [body.type, body.username]
   )
     .then(function (response) {
       console.log(response.rows);
