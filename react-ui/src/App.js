@@ -2,45 +2,31 @@
 
 import React, { Fragment } from 'react';
 import './App.css';
+<<<<<<< HEAD
+import ViewAllTasks from './components/ViewAllTasks';
+=======
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+>>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
 
 function App() {
-  // const [message, setMessage] = useState(null);
-  // const [isFetching, setIsFetching] = useState(false);
-  // const [url, setUrl] = useState('/api');
 
-  // const fetchData = useCallback(() => {
-  //   fetch(url)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error(`status ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(json => {
-  //       setMessage(json.message);
-  //       setIsFetching(false);
-  //     }).catch(e => {
-  //       setMessage(`API call failed: ${e}`);
-  //       setIsFetching(false);
-  //     })
-  // }, [url]);
-
-  // useEffect(() => {
-  //   setIsFetching(true);
-  //   fetchData();
-  // }, [fetchData]);
 
   return (
     <Fragment>
+<<<<<<< HEAD
+      <div className="container">
+        <ViewAllTasks />
+      </div>
+=======
         <div className="container">
           <Login />
         </div>
         <div className="container">
           <SignUp />
         </div>
+>>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
     </Fragment>
   );
 
