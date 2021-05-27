@@ -6,15 +6,14 @@ const Login = props => {
 
     const[username , setUsername] = useState("")
     const[password , setPassword] = useState("")
-<<<<<<< HEAD
+
     const[type , setType] = useState("")
 
     async function signup(user = null) {
         // setUser(user);
         props.history.push('/signup');
       }
-=======
->>>>>>> 7f3b4f0694c02785930b9a5570b252dd2c754761
+
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
@@ -35,7 +34,6 @@ const Login = props => {
     return (
         <Fragment>
             <h1 className="text-center mt-2"> Task Manager Login</h1>
-<<<<<<< HEAD
             <div>
                 <form onSubmit={onSubmitForm}>
                     {/* Make AccountType into a dropdown */}
@@ -64,16 +62,6 @@ const Login = props => {
                     />
                 </Switch>
             </div>
-=======
-            <form onSubmit={onSubmitForm}>
-                <label name="username" htmlFor="username">Username</label>
-                <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
-                <label name="password" htmlFor="password">Password</label>
-                <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
-                <button className="btn btn-success mt-3">Login</button>
-            </form>
-            <button className="btn btn-hyperlink mt-3">New Employee? Click here.</button>
->>>>>>> 7f3b4f0694c02785930b9a5570b252dd2c754761
         </Fragment>
     )
 }
