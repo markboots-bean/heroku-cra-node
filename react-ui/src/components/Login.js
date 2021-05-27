@@ -5,13 +5,12 @@ const Login = () => {
 
     const[username , setUsername] = useState("")
     const[password , setPassword] = useState("")
-    const[type , setType] = useState("")
 
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { username, password, type };
+            const body = { username, password};
             const response = await fetch("/login", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
@@ -28,9 +27,6 @@ const Login = () => {
         <Fragment>
             <h1 className="text-center mt-2"> Task Manager Login</h1>
             <form onSubmit={onSubmitForm}>
-                {/* Make AccountType into a dropdown */}
-                <label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
-                <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
                 <label name="username" htmlFor="username">Username</label>
                 <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                 <label name="password" htmlFor="password">Password</label>
