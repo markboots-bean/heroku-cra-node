@@ -29,14 +29,18 @@ const Login = () => {
             <form onSubmit={onSubmitForm}>
                 {/* Make AccountType into a dropdown */}
                 <label name="type" htmlFor="type">Account Type</label>
-                <input type="type" class name="form-control" value={type} onChange={e => setType(e.target.value)}/>
+                <select name="type" id="type" className="form-control">
+                    <option value="">--Please choose account type--</option>
+                    <option value="Employer">Employer</option>
+                    <option value="Employee">Employee</option>
+                </select>
                 <label name="username" htmlFor="username">Username</label>
-                <input type="username" class name="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
+                <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                 <label name="password" htmlFor="password">Password</label>
-                <input type="password" class name="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
-                <button className="btn btn-success">New Employee? Click here.</button>
-                <button className="btn btn-success">Login</button>
+                <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
+                <button className="btn btn-success mt-3">Login</button>
             </form>
+            <button className="btn btn-hyperlink mt-3">New Employee? Click here.</button>
         </Fragment>
     )
 }
