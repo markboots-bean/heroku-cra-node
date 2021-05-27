@@ -32,7 +32,7 @@ const Login = () => {
                 <select name="type" id="type" className="form-control">
                     <option value="">--Please choose account type--</option>
                     <option value="Employer">Employer</option>
-                    <option value="Employee">Employer</option>
+                    <option value="Employee">Employee</option>
                 </select>
                 <label name="username" htmlFor="username">Username</label>
                 <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
