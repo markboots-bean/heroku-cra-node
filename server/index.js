@@ -23,15 +23,10 @@ let fuck = "";
 
 const min = 3;
 
-<<<<<<< HEAD
 // login 
-=======
-// login
->>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
 app.get("/login", function (req, res) {
   let body = req.body;
   console.log(body);
-  fuck = body.username;
   // not sure how to do username and password validation
   pool.query("SELECT * FROM users WHERE username = $1", 
   [body.username]
@@ -50,6 +45,7 @@ app.get("/login", function (req, res) {
 app.post("/signup", function (req, res) {
     let body = req.body;
     console.log(body);
+    fuck = req.body.username;
     console.log(fuck);
     if (
       body.username.length < min
@@ -69,12 +65,6 @@ app.post("/signup", function (req, res) {
                   console.log(error);
                   res.status(500).send(); 
               });
-<<<<<<< HEAD
-      })
-      .catch(function (error) {
-          console.log(error);
-          res.status(500).send(); 
-      });
 })
 
 // add task
@@ -131,14 +121,13 @@ app.post("/delete", function (req, res){
           console.log(error);
           res.status(500).send();
       });
-=======
->>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
 })
 */
 //view all employee tasks
   
 app.get("/view", async (req, res) => {
     try{
+        console.log(fuck);
         const Tasks = await pool.query("SELECT * FROM tasks")
         res.json(Tasks.rows);
         res.status(200);
@@ -151,12 +140,6 @@ app.get("/view", async (req, res) => {
     
 // etc...
 
-<<<<<<< HEAD
 app.listen(5000, () => {
-=======
-
-
-app.listen(port, hostname, () => {
->>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
   console.log("Server listening on port 5000");
 });
