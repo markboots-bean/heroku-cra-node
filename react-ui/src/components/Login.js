@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 const Login = () => {
 
@@ -7,15 +7,16 @@ const Login = () => {
     const[type , setType] = useState("")
 
 
-    const onSubmitForm = (e) => {
+    const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
             const body = { username };
-            const response = fetch("http://localhost:5000/login", {
+            const response = await fetch("/login", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
+            console.log("fetch method called to GET");
             console.log(response);
         } catch (error) {
             console.error(error.message)
@@ -24,19 +25,22 @@ const Login = () => {
 
     return (
         <Fragment>
-            <h1 className="text-center mt-2"> Task Manager </h1>
-            <h2>Login Page</h2>
-            <form className="d-flex mt-2" onSubmit={onSubmitForm}>
+            <h1 className="text-center mt-2"> Task Manager Login</h1>
+            <form onSubmit={onSubmitForm}>
                 {/* Make AccountType into a dropdown */}
-                <label name="type" for="type">Account Type</label>
-                <input type="type" class name="form-control" value={type} onChange={e => setType(e.target.value)}></input>
-                <label name="username" for="username">Username</label>
-                <input type="username" class name="form-control" value={username} onChange={e => setUsername(e.target.value)}></input>
-                <label name="password" for="password">Password</label>
-                <input type="password" class name="form-control" value={password} onChange={e => setPassword(e.target.value)}></input>
-                <button className="btn btn-success">New Employee? Click here.</button>
-                <button className="btn btn-success">Login</button>
+                <label name="type" htmlFor="type">Account Type</label>
+                <select name="type" id="type" className="form-control">
+                    <option value="">--Please choose account type--</option>
+                    <option value="Employer">Employer</option>
+                    <option value="Employee">Employee</option>
+                </select>
+                <label name="username" htmlFor="username">Username</label>
+                <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
+                <label name="password" htmlFor="password">Password</label>
+                <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
+                <button className="btn btn-success mt-3">Login</button>
             </form>
+            <button className="btn btn-hyperlink mt-3">New Employee? Click here.</button>
         </Fragment>
     )
 }

@@ -2,6 +2,7 @@
 
 import React, { Fragment } from 'react';
 import './App.css';
+import Login from './components/Login';
 import SignUp from './components/SignUp';
 
 function App() {
@@ -34,8 +35,11 @@ function App() {
   return (
     <Fragment>
       <div className="container">
-        <SignUp />
+        <Login />
       </div>
+      {/* <div className="container">
+        <SignUp />
+      </div> */}
     </Fragment>
   );
 
