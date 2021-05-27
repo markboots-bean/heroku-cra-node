@@ -1,45 +1,50 @@
 // import React, { useCallback, useEffect, useState } from 'react';
 
 import React, { Fragment } from 'react';
+import { Switch, Route, Link } from 'react-router-dom'
 import './App.css';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import Login from './components/login';
+import SignUp from './components/signup';
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
-  // const [message, setMessage] = useState(null);
-  // const [isFetching, setIsFetching] = useState(false);
-  // const [url, setUrl] = useState('/api');
+  const [user, setUser] = React.useState(null);
 
-  // const fetchData = useCallback(() => {
-  //   fetch(url)
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error(`status ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(json => {
-  //       setMessage(json.message);
-  //       setIsFetching(false);
-  //     }).catch(e => {
-  //       setMessage(`API call failed: ${e}`);
-  //       setIsFetching(false);
-  //     })
-  // }, [url]);
-
-  // useEffect(() => {
-  //   setIsFetching(true);
-  //   fetchData();
-  // }, [fetchData]);
+    async function login(user = null) {
+      setUser(user);
+    }
+    // async function logout(){
+    //   setUser(null);
+    // }
+    async function signup(user = null) {
+      setUser(user);
+    }
 
   return (
     <Fragment>
         <div className="container">
           <Login />
         </div>
-        <div className="container">
+        {/* <div className="container">
           <SignUp />
+        </div> */}
+        <div>
+        <Switch>
+                <Route exact path={["/login"]} component={Login} />
+  
+                <Route 
+                  path="/login"
+                  render={(props) => (
+                    <Login {...props} login={login} />
+                  )}
+                />
+                <Route 
+                  exact path="/signup"
+                  render={(props) => (
+                  <SignUp {...props} signup={signup} />
+                )}
+                />
+              </Switch>
         </div>
     </Fragment>
   );

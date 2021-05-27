@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from 'react';
+import { Switch, Route, Link } from 'react-router-dom'
+import Login from "./login";
 
-const SignUp = () => {
+const SignUp = props => {
     const [name, setName] = useState("")
      //state     set state   default state (in input field)
     const [username, setUserName] = useState("")
@@ -19,9 +21,11 @@ const SignUp = () => {
             });
             console.log("fetch method called to POST");
             console.log(response);
+        
         } catch (error) {
             console.log(error.message);
         }
+        props.history.push('/login');
     }
 
     return (
