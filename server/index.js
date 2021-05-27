@@ -15,53 +15,49 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("../react-ui/public"));
  
-// add api routes here 
+let port = 5000;
+let hostname = "localhost";
+//
+// add api routes here  z
 
-const validType = ["employer", "employee"];
 const min = 3;
 
+<<<<<<< HEAD
 // login 
+=======
+// login
+>>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
 app.get("/login", function (req, res) {
   let body = req.body;
-  let { type } = req.query;
-  if (type != 'employee' || type != 'employer') {
-    res.send();
-    return res.status(500);
-  }
-  
+  console.log(body);
+
   // not sure how to do username and password validation
-  pool.query("SELECT * FROM users WHERE type = $1 AND username = $2", 
-  [type, body.username]
+  pool.query("SELECT * FROM users WHERE username = $1", 
+  [body.username]
   )
     .then(function (response) {
       console.log(response.rows);
-      res.send();
-      res.status(200);
+      res.status(200).send();
     })
     .catch(function (error) {
-        return res.sendStatus(500);
+        console.log(error);
+        res.status(500).send();
     });
 })
 
 // create employee
-
-app.post("/signup", function (req, res){
+app.post("/signup", function (req, res) {
     let body = req.body;
+    console.log(body)
     if (
-      body.username != "" ||
-      body.username.length < min ||
-      !validType.includes(body.type)
+      body.username.length < min
     ) {
       res.send();
       return res.status(400);
     }
-
-      bcrypt
-      .hash(body.password, saltRounds)
-      .then(function (hashedPassword) {
           pool.query(
             "INSERT INTO users (name, username, password, type) VALUES($1, $2, $3, $4)",
-            [body.name, body.username, hashedPassword, body.type]
+            [body.name, body.username, body.password, body.type]
           )
               .then(function (response) {
                   console.log(response.rows)
@@ -71,6 +67,7 @@ app.post("/signup", function (req, res){
                   console.log(error);
                   res.status(500).send(); 
               });
+<<<<<<< HEAD
       })
       .catch(function (error) {
           console.log(error);
@@ -132,6 +129,8 @@ app.post("/delete", function (req, res){
           console.log(error);
           res.status(500).send();
       });
+=======
+>>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
 })
 */
 //view all employee tasks
@@ -150,6 +149,12 @@ app.get("/view", async (req, res) => {
     
 // etc...
 
+<<<<<<< HEAD
 app.listen(5000, () => {
+=======
+
+
+app.listen(port, hostname, () => {
+>>>>>>> aeca204ed12083e9760d3e7b3688d8825a730a65
   console.log("Server listening on port 5000");
 });
