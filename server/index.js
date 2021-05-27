@@ -45,7 +45,6 @@ app.get("/login", function (req, res) {
 app.post("/signup", function (req, res) {
     let body = req.body;
     console.log(body)
-    console.log("testing")
     if (
       body.username.length < min
     ) {
