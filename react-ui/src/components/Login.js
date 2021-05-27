@@ -6,11 +6,10 @@ const Login = () => {
     const[username , setUsername] = useState("")
     const[password , setPassword] = useState("")
 
-
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { username, password};
+            const body = { username, password };
             const response = await fetch("/login", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },

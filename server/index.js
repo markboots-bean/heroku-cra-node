@@ -17,6 +17,7 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
+let fuck = "";
 //
 // add api routes here  z
 
@@ -26,7 +27,7 @@ const min = 3;
 app.get("/login", function (req, res) {
   let body = req.body;
   console.log(body);
-
+  fuck = body.username;
   // not sure how to do username and password validation
   pool.query("SELECT * FROM users WHERE username = $1", 
   [body.username]
@@ -44,7 +45,8 @@ app.get("/login", function (req, res) {
 // create employee
 app.post("/signup", function (req, res) {
     let body = req.body;
-    console.log(body)
+    console.log(body);
+    console.log(fuck);
     if (
       body.username.length < min
     ) {
@@ -56,7 +58,7 @@ app.post("/signup", function (req, res) {
             [body.name, body.username, body.password, body.type]
           )
               .then(function (response) {
-                  console.log(response.rows)
+                  console.log(response.rows);
                   res.status(200).send();
               })
               .catch(function (error) {
