@@ -13,7 +13,7 @@ const SignUp = props => {
     const onSubmitForm = async (e) => {
         e.preventDefault(); // so it doesn't refresh
         try {
-            const body = { name, username, password, type };
+            const body = { name, username, password };
             const response = await fetch("/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -21,7 +21,7 @@ const SignUp = props => {
             });
             console.log("fetch method called to POST");
             console.log(response);
-        
+            
         } catch (error) {
             console.log(error.message);
         }
