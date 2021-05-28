@@ -6,30 +6,35 @@ const Login = props => {
 
     const[username , setUsername] = useState("")
     const[password , setPassword] = useState("")
-
     const[type , setType] = useState("")
 
     async function signup(user = null) {
         // setUser(user);
         props.history.push('/signup');
-      }
-
+    }
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { username, password };
-            const response = await fetch("/login", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
-            });
-            console.log("fetch method called to GET");
+            const body = { type, username, password };
+            const response = await fetch("/login")
             console.log(response);
+            console.log(body);
+            // if (response.status === 200) {
+            //     return response.json();
+            // }
         } catch (error) {
-            console.error(error.message)
+            console.error(error.message);
         }
-    }
+        // await fetch(`/login?username=${body.username}`)
+        // .then(function (response) {
+        //     if (response.status === 200) {
+        //         return response.json();
+        //     }
+        // }).catch(function (error) {
+        //     console.error(error.message);
+        // });
+    };
 
     return (
         <Fragment>
