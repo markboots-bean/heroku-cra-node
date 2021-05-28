@@ -7,7 +7,7 @@ const SignUp = props => {
      //state     set state   default state (in input field)
     const [username, setUserName] = useState("")
     const [password, setPassword] = useState("")
-    // const [type, setType] = useState("")
+    const [type, setType] = useState("")
 
 
     const onSubmitForm = async (e) => {
