@@ -9,6 +9,10 @@ const SignUp = props => {
     const [password, setPassword] = useState("")
     const [type, setType] = useState("")
 
+    async function login(user = null) {
+        // setUser(user);
+        props.history.push('/login');
+    }
 
     const onSubmitForm = async (e) => {
         e.preventDefault(); // so it doesn't refresh
@@ -31,6 +35,7 @@ const SignUp = props => {
     return (
         <Fragment>
             <h1 className="text-center mt-2">Employee Sign Up</h1>
+            <div>
             <form onSubmit={onSubmitForm}>
                 <label name="name" htmlFor="name">Name:</label>
                 <input type="name" className="form-control" value={name} onChange={e => setName(e.target.value)}/>
@@ -40,8 +45,26 @@ const SignUp = props => {
                 <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
                 {/* <label name="type" for="type">Type:</label>
                 <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/> */}
-                <button className="btn btn-success">Sign up</button>
+                <div className="text-center mt-3">
+                    <button className="btn btn-success">Sign up</button>  
+                </div>
             </form>
+            <div className="text-center mt-3">
+                    <Link to={"/login"} className="App-link">
+                        Existing Employer or Employee? Login here
+                    </Link>
+                </div>
+            </div>
+            <div>
+                <Switch>
+                    <Route 
+                        exact path="/login"
+                        render={(props) => (
+                        <Login {...props} login={login} />
+                        )}
+                    />
+                </Switch>
+            </div>
         </Fragment>
     )
 }

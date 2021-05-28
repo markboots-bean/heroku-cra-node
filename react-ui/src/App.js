@@ -28,16 +28,16 @@ function App() {
         <nav className="navbar navbar-expand navbar-dark bg-dark" expand="lg">
               <div class="row">
               <a href="/" className="navbar-brand">
-                Home page.
+                Task Manager
               </a>
               </div>
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link to={"/home"} className="nav-link">
                     Home
                   </Link>
-                </li>
-                <li className="nav-item" >
+                </li> */}
+                {/* <li className="nav-item" >
                   { user ? (
                     <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
                       Logout {user.name}
@@ -52,7 +52,7 @@ function App() {
                   <Link to={"/signup"} className="nav-link">
                     Sign Up
                   </Link>
-                </li>
+                </li> */}
               </div>
             </nav>
         </div>
@@ -61,9 +61,10 @@ function App() {
         </div> */}
         <div>
         <Switch>
-            <Route exact path={["/home"]} component={Home} />
+            <Route exact path={["/"]} component={Home} />
+                <Route exact path={["/home"]} component={Home} />
                 <Route 
-                  path="/login"
+                  exact path="/login"
                   render={(props) => (
                     <Login {...props} login={login} />
                   )}

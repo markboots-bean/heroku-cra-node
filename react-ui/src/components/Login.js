@@ -48,12 +48,14 @@ const Login = props => {
                     <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                     <label name="password" htmlFor="password">Password</label>
                     <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)}/>
-                    <button className="btn btn-success mt-3">Login</button>
+                    <div className="text-center">
+                        <button className="btn btn-success mt-3">Login</button>
+                    </div>
                 </form>
                 {/* <button className="btn btn-hyperlink mt-3">New Employee? Click here.</button> */}
-                <div>
+                <div className="text-center mt-3">
                     <Link to={"/signup"} className="App-link">
-                        New Employee? Click here.
+                        New Employee? Signup here
                     </Link>
                 </div>
             </div>
