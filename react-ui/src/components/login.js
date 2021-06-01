@@ -29,9 +29,8 @@ const Login = props => {
         } catch (error) {
             console.error(error.message);
         }
+        props.history.push('/employeetasks');
 
-        //<label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
-        //<input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
     };
 
     return (
