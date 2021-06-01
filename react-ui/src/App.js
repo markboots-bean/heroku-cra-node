@@ -8,6 +8,7 @@ import Home from './components/home'
 import Login from './components/login';
 import SignUp from './components/signup';
 import EmployeeTasks from './components/employeetasks';
+import ViewAllTasks from './components/viewalltasks';
 
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -28,7 +29,7 @@ function App() {
     <Fragment>
         <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark" expand="lg">
-              <div class="row">
+              <div className="row">
               <a href="/" className="navbar-brand">
                 Task Manager
               </a>
@@ -75,6 +76,12 @@ function App() {
                   exact path="/employeetasks"
                   render={(props) => (
                     <EmployeeTasks {...props}/>
+                  )}
+                />
+                <Route 
+                  exact path="/viewalltasks"
+                  render={(props) => (
+                    <ViewAllTasks {...props}/>
                   )}
                 />
                 <Route 

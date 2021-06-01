@@ -17,6 +17,7 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
+<<<<<<< HEAD
 //
 // add api routes here  z
 
@@ -24,6 +25,13 @@ const min = 3;
 
 // login
 app.get("/login", function (req, res) {
+=======
+// add api routes here 
+const min = 3;
+
+// login 
+app.post("/login", function (req, res) {
+>>>>>>> 89a831a54c4e53c6dc4d19dc57e407f7076eaa7e
   let body = req.body;
   let { type } = req.query;
   console.log(body);
