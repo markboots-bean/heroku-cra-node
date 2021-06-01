@@ -29,7 +29,12 @@ const Login = props => {
         } catch (error) {
             console.error(error.message);
         }
-        props.history.push('/employeetasks');
+
+        if (username === 'employer') {
+            props.history.push('/viewalltasks');
+        } else {
+            props.history.push('/employeetasks');           
+        }
 
     };
 
