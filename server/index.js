@@ -17,34 +17,40 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
-// let fuck = "";
 //
 // add api routes here  z
 
 const min = 3;
 
-// login 
+// login
 app.get("/login", function (req, res) {
   let body = req.body;
+  let { type } = req.query;
+  console.log(body);
+  if (type != 'employee' || type != 'employer') {
+    res.send();
+    return res.status(500);
+  }
+
   // not sure how to do username and password validation
-  pool.query("SELECT * FROM users WHERE username = $1", 
-  [body.username]
+  pool.query("SELECT * FROM users WHERE type = $1 AND username = $2", 
+  [type, body.username]
   )
     .then(function (response) {
-      res.json({ users: response.rows });
+      console.log(response.rows);
+      res.status(200).send();
     })
     .catch(function (error) {
-      console.log(error);
-      res.status(500).send();
-    })
+        console.log(error);
+        res.status(500).send();
+    });
 })
 
 // create employee
 app.post("/signup", function (req, res) {
     let body = req.body;
-    console.log(body);
-    // fuck = req.body.username;
-    // console.log(fuck);
+    console.log(body)
+    console.log("testing")
     if (
       body.username.length < min
     ) {
@@ -56,7 +62,7 @@ app.post("/signup", function (req, res) {
             [body.name, body.username, body.password, body.type]
           )
               .then(function (response) {
-                  console.log(response.rows);
+                  console.log(response.rows)
                   res.status(200).send();
               })
               .catch(function (error) {
@@ -65,79 +71,77 @@ app.post("/signup", function (req, res) {
               });
 })
 
-// add task
-/*
-app.post("/add", function (req, res){
-    let body = req.body;
-    if (
-      body.name != "" ||
-      body.name.length < min
-    ) {
-      res.send();
-      return res.status(400);
-    }
-      .then(function (body) {
-          pool.query(
-            "INSERT INTO tasks (name, description) VALUES($1, $2)",
-            [body.name, body.description]
-          )
-              .then(function (response) {
-                  console.log(response.rows)
-                  res.status(200).send();
-              })
-              .catch(function (error) {
-                  console.log(error);
-                  res.status(500).send();
-              });
-      })
-      .catch(function (error) {
-          console.log(error);
-          res.status(500).send();
-      });
-*/
-// delete task
-    /*
-app.post("/delete", function (req, res){
-    let body = req.body;
-    if (body.name != "") {
-      res.send();
-      return res.status(400);
-    }.then(function (body) {
-          pool.query(
-            "DELETE FROM tasks WHERE description = $1", [body.description]
-          )
-              .then(function (response) {
-                  console.log(response.rows)
-                  res.status(200).send();
-              })
-              .catch(function (error) {
-                  console.log(error);
-                  res.status(500).send();
-              });
-      })
-      .catch(function (error) {
-          console.log(error);
-          res.status(500).send();
-      });
-})
-*/
-//view all employee tasks
+//view tasks
   
-app.get("/view", async (req, res) => {
-    try{
-        console.log(fuck);
-        const Tasks = await pool.query("SELECT * FROM tasks")
-        res.json(Tasks.rows);
-        res.status(200);
-    }
-    catch (err) {
-        console.error(err.message);
-        res.status(500).send();
-    }
-})
+app.post("/usertasks", function (req, res){
+  let name = mark;
+    pool.query("SELECT * FROM tasks WHERE name = $1" , [name])
+            .then(function (response) {
+                console.log(responce,rows);
+                res.json({ rows: response.rows });
+            })
+            .catch(function (error) {
+                res.sendStatus(500);
+            });
+});
     
+app.post("/view", function (req, res){
+    pool.query("SELECT * FROM tasks")
+              .then(function (response) {
+                  console.log(response.rows)
+                  res.status(200).send();
+              })
+              .catch(function (error) {
+                  console.log(error);
+                  res.status(500).send();
+              });
+})
+
 // etc...
 
-app.listen(5000, () => {
+
+
+app.listen(port, hostname, () => {
   console.log("Server listening on port 5000");
 });
+
+
+
+
+// const isDev = process.env.NODE_ENV !== 'production';
+// const PORT = process.env.PORT || 5000;
+
+// // Multi-process to utilize all CPU cores.
+// if (!isDev && cluster.isMaster) {
+//   console.error(`Node cluster master ${process.pid} is running`);
+
+//   // Fork workers.
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
+
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
+//   });
+
+// } else {
+//   const app = express();
+
+//   // Priority serve any static files.
+//   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
+
+//   // Answer API requests.
+//   app.get('/api', function (req, res) {
+//     res.set('Content-Type', 'application/json');
+//     res.send('{"message":"Hello from the custom server!"}');
+//   });
+
+//   // All remaining requests return the React app, so it can handle routing.
+//   app.get('*', function(request, response) {
+//     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
+//   });
+
+//   app.listen(PORT, function () {
+//     console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
+//   });
+// }
