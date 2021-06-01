@@ -17,9 +17,13 @@ const Login = props => {
         e.preventDefault();
         try {
             const body = { type, username, password };
-            const response = await fetch("/login")
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+            console.log("fetch method called to POST");
             console.log(response);
-            console.log(body);
             // if (response.status === 200) {
             //     return response.json();
             // }
@@ -34,6 +38,7 @@ const Login = props => {
         // }).catch(function (error) {
         //     console.error(error.message);
         // });
+        props.history.push('/employeetasks');
     };
 
     return (

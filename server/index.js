@@ -17,14 +17,11 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
-// let fuck = "";
-//
-// add api routes here  z
-
+// add api routes here 
 const min = 3;
 
 // login 
-app.get("/login", function (req, res) {
+app.post("/login", function (req, res) {
   let body = req.body;
   // not sure how to do username and password validation
   pool.query("SELECT * FROM users WHERE username = $1", 

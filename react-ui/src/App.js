@@ -28,7 +28,7 @@ function App() {
     <Fragment>
         <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark" expand="lg">
-              <div class="row">
+              <div className="row">
               <a href="/" className="navbar-brand">
                 Task Manager
               </a>
