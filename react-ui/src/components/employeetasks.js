@@ -1,6 +1,31 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 const EmployeeTasks = () => {
+    const [tasks, setTasks] = useState([]);
+    const getTodos = async () => {
+        try {
+          const response = await fetch("http://localhost:5000/usertasks");
+          const jsonData = await response.json();
+          console.log(jsonData);
+            let table = document.getElementById("employee-task-table");
+            for (let row of jsonData){
+                let tR = document.createElement("tr");
+                for(let key of ["name", "description"]){
+                    let cell = document.createElement("td");
+                    cell.textContent = row[key];
+                    table.append(cell);
+                }
+                table.append(tR);}
+          setTasks(jsonData);
+        } catch (err) {
+          console.error(err.message);
+        }
+      };
+    
+    useEffect(() => {
+        getTodos();
+      }, []);
+
     return (
         <Fragment>
             <h1 className="text-center mt-2">Task Viewer</h1>
@@ -11,7 +36,7 @@ const EmployeeTasks = () => {
                         <th>Task</th>
                         <th>Task Description</th>
                         <th>Complete</th>
-                    </tr>   
+                    </tr>
                 </thead>
                 <tbody id="employee-task-table"></tbody>
             </table>
@@ -21,4 +46,3 @@ const EmployeeTasks = () => {
 }
 
 export default EmployeeTasks;
-    
