@@ -8,6 +8,7 @@ import Home from './components/home'
 import Login from './components/login';
 import SignUp from './components/signup';
 import EmployeeTasks from './components/employeetasks';
+import ViewAllTasks from './components/viewalltasks';
 
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -75,6 +76,12 @@ function App() {
                   exact path="/employeetasks"
                   render={(props) => (
                     <EmployeeTasks {...props}/>
+                  )}
+                />
+                <Route 
+                  exact path="/viewalltasks"
+                  render={(props) => (
+                    <ViewAllTasks {...props}/>
                   )}
                 />
                 <Route 
