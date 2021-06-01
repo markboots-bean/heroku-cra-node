@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-const ViewAllTasks = () => {
+const viewalltasks = () => {
     const [tasks, setTasks] = useState([]);
     
     const getTodos = async () => {
@@ -43,4 +43,4 @@ const ViewAllTasks = () => {
     )
 }
 
-export default ViewAllTasks;
+export default viewalltasks;

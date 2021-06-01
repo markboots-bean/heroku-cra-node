@@ -42,8 +42,8 @@ const Login = props => {
             <div>
                 <form onSubmit={onSubmitForm}>
                     {/* Make AccountType into a dropdown */}
-                    <label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
-                    <input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
+                    //<label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
+                    //<input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
                     <label name="username" htmlFor="username">Username</label>
                     <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                     <label name="password" htmlFor="password">Password</label>

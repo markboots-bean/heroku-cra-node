@@ -3,7 +3,6 @@ const express = require('express');
 const bcrypt = require("bcrypt");
 const app = express();
 const cors = require('cors');
-// const pool = require('./db');
 const saltRounds = 10;
 const env = require("../env.json");
 const Pool = pg.Pool;
@@ -17,9 +16,6 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
-// let fuck = "";
-//
-// add api routes here  z
 
 const min = 3;
 
