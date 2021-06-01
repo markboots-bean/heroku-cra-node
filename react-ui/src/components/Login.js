@@ -16,24 +16,22 @@ const Login = props => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
         try {
-            const body = { type, username, password };
-            const response = await fetch("/login")
-            console.log(response);
-            console.log(body);
-            // if (response.status === 200) {
-            //     return response.json();
-            // }
+            const body = { username, password };
+            const response = await fetch("/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+            console.log("fetch method called to POST");
+            const jsonData = await response.json();
+            console.log(jsonData);
+
         } catch (error) {
             console.error(error.message);
         }
-        // await fetch(`/login?username=${body.username}`)
-        // .then(function (response) {
-        //     if (response.status === 200) {
-        //         return response.json();
-        //     }
-        // }).catch(function (error) {
-        //     console.error(error.message);
-        // });
+
+        //<label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
+        //<input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
     };
 
     return (
@@ -42,8 +40,6 @@ const Login = props => {
             <div>
                 <form onSubmit={onSubmitForm}>
                     {/* Make AccountType into a dropdown */}
-                    //<label name="type" htmlFor="type">Account Type (please specify 'employee' or 'employer')</label>
-                    //<input type="type" className="form-control" value={type} onChange={e => setType(e.target.value)}/>
                     <label name="username" htmlFor="username">Username</label>
                     <input type="username" className="form-control" value={username} onChange={e => setUsername(e.target.value)}/>
                     <label name="password" htmlFor="password">Password</label>

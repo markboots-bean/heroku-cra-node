@@ -16,29 +16,34 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
-
+let testingname = "";
 const min = 3;
 
-// login 
-app.get("/login", function (req, res) {
-  let body = req.body;
-  // not sure how to do username and password validation
-  pool.query("SELECT * FROM users WHERE username = $1", 
-  [body.username]
-  )
-    .then(function (response) {
-      res.json({ users: response.rows });
-    })
-    .catch(function (error) {
-      console.log(error);
-      res.status(500).send();
-    })
+// login
+
+app.post("/login", async (req, res) => {
+    let body = req.body;
+    console.log(body);
+    console.log("HIT LOGIN ROUTE");
+    testingname = body.name;
+    try{
+        const Tasks = await pool.query("SELECT * FROM users WHERE username = $1", [body.username])
+        console.log(Tasks.rows);
+        res.json(Tasks.rows);
+        res.status(200);
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send();
+    }
 })
 
 // create employee
 app.post("/signup", function (req, res) {
     let body = req.body;
+    console.log(testingname);
     console.log(body);
+    console.log(body.type);
     // fuck = req.body.username;
     // console.log(fuck);
     if (
@@ -121,7 +126,6 @@ app.post("/delete", function (req, res){
   
 app.get("/view", async (req, res) => {
     try{
-        console.log(fuck);
         const Tasks = await pool.query("SELECT * FROM tasks")
         res.json(Tasks.rows);
         res.status(200);
