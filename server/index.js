@@ -16,7 +16,6 @@ app.use(express.static("../react-ui/public"));
  
 let port = 5000;
 let hostname = "localhost";
-<<<<<<< HEAD
 let testingname = "";
 const min = 3;
 
@@ -37,58 +36,17 @@ app.post("/login", async (req, res) => {
         console.error(err.message);
         res.status(500).send();
     }
-=======
-<<<<<<< HEAD
-//
-// add api routes here  z
-
-const min = 3;
-
-// login
-app.get("/login", function (req, res) {
-=======
-// add api routes here 
-const min = 3;
-
-// login 
-app.post("/login", function (req, res) {
->>>>>>> 89a831a54c4e53c6dc4d19dc57e407f7076eaa7e
-  let body = req.body;
-  let { type } = req.query;
-  console.log(body);
-  if (type != 'employee' || type != 'employer') {
-    res.send();
-    return res.status(500);
-  }
-
-  // not sure how to do username and password validation
-  pool.query("SELECT * FROM users WHERE type = $1 AND username = $2", 
-  [type, body.username]
-  )
-    .then(function (response) {
-      console.log(response.rows);
-      res.status(200).send();
-    })
-    .catch(function (error) {
-        console.log(error);
-        res.status(500).send();
-    });
->>>>>>> 836f6889abcfcbf04af61c4497f8237ffa56ec55
 })
+
+// add api routes here
 
 // create employee
 app.post("/signup", function (req, res) {
     let body = req.body;
-<<<<<<< HEAD
     console.log(testingname);
     console.log(body);
     console.log(body.type);
-    // fuck = req.body.username;
-    // console.log(fuck);
-=======
-    console.log(body)
-    console.log("testing")
->>>>>>> 836f6889abcfcbf04af61c4497f8237ffa56ec55
+
     if (
       body.username.length < min
     ) {
@@ -121,7 +79,7 @@ app.post("/usertasks", function (req, res){
             .catch(function (error) {
                 res.sendStatus(500);
             });
-});
+})
     
 app.post("/view", function (req, res){
     pool.query("SELECT * FROM tasks")
@@ -134,8 +92,7 @@ app.post("/view", function (req, res){
                   res.status(500).send();
               });
 })
-<<<<<<< HEAD
-*/
+
 //view all employee tasks
   
 app.get("/view", async (req, res) => {
@@ -149,10 +106,6 @@ app.get("/view", async (req, res) => {
         res.status(500).send();
     }
 })
-    
-=======
-
->>>>>>> 836f6889abcfcbf04af61c4497f8237ffa56ec55
 // etc...
 
 
@@ -160,44 +113,3 @@ app.get("/view", async (req, res) => {
 app.listen(port, hostname, () => {
   console.log("Server listening on port 5000");
 });
-
-
-
-
-// const isDev = process.env.NODE_ENV !== 'production';
-// const PORT = process.env.PORT || 5000;
-
-// // Multi-process to utilize all CPU cores.
-// if (!isDev && cluster.isMaster) {
-//   console.error(`Node cluster master ${process.pid} is running`);
-
-//   // Fork workers.
-//   for (let i = 0; i < numCPUs; i++) {
-//     cluster.fork();
-//   }
-
-//   cluster.on('exit', (worker, code, signal) => {
-//     console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
-//   });
-
-// } else {
-//   const app = express();
-
-//   // Priority serve any static files.
-//   app.use(express.static(path.resolve(__dirname, '../react-ui/build')));
-
-//   // Answer API requests.
-//   app.get('/api', function (req, res) {
-//     res.set('Content-Type', 'application/json');
-//     res.send('{"message":"Hello from the custom server!"}');
-//   });
-
-//   // All remaining requests return the React app, so it can handle routing.
-//   app.get('*', function(request, response) {
-//     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
-//   });
-
-//   app.listen(PORT, function () {
-//     console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
-//   });
-// }
