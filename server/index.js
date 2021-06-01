@@ -38,7 +38,17 @@ app.post("/login", async (req, res) => {
     }
 })
 
-// add api routes here
+app.get("/usertasks", function (req, res){
+    let name = 'mark';
+    pool.query("SELECT * FROM tasks WHERE name = $1" , [name])
+            .then(function (response) {
+    
+                res.json({ rows: response.rows });
+            })
+            .catch(function (error) {
+                res.sendStatus(500);
+            });
+});
 
 // create employee
 app.post("/signup", function (req, res) {
@@ -69,28 +79,18 @@ app.post("/signup", function (req, res) {
 
 //view tasks
   
-app.post("/usertasks", function (req, res){
-  let name = mark;
-    pool.query("SELECT * FROM tasks WHERE name = $1" , [name])
-            .then(function (response) {
-                console.log(responce,rows);
-                res.json({ rows: response.rows });
-            })
-            .catch(function (error) {
-                res.sendStatus(500);
-            });
-})
-    
-app.post("/view", function (req, res){
-    pool.query("SELECT * FROM tasks")
-              .then(function (response) {
-                  console.log(response.rows)
-                  res.status(200).send();
-              })
-              .catch(function (error) {
-                  console.log(error);
-                  res.status(500).send();
-              });
+app.get("/usertasks", async (req, res) => {
+    let body = req.body;
+    console.log(body);
+    try{
+        const Tasks = await pool.query("SELECT * FROM tasks WHERE name = $1" , [body.name])
+        res.json(Tasks.rows);
+        res.status(200);
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send();
+    }
 })
 
 //view all employee tasks
