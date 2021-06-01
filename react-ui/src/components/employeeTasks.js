@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 
-const employeeTasks = () => {
+const EmployeeTasks = () => {
     return (
         <Fragment>
             <h1 className="text-center mt-2">Task Viewer</h1>
@@ -20,5 +20,5 @@ const employeeTasks = () => {
     
 }
 
-export default employeeTasks;
+export default EmployeeTasks;
     

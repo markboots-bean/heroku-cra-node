@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Home from './components/home'
 import Login from './components/login';
 import SignUp from './components/signup';
+import EmployeeTasks from './components/employeetasks';
+
 // import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -67,6 +69,12 @@ function App() {
                   exact path="/login"
                   render={(props) => (
                     <Login {...props} login={login} />
+                  )}
+                />
+                <Route 
+                  exact path="/employeetasks"
+                  render={(props) => (
+                    <EmployeeTasks {...props}/>
                   )}
                 />
                 <Route 
